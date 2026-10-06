@@ -1,10 +1,150 @@
 <!DOCTYPE html>
-<html>
+<html lang="bn">
 <head>
-  <title>NOOR Islamic App</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NOOR - Islamic App</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f8f5;
+      color: #173b2d;
+    }
+
+    header {
+      background: #0b6b4b;
+      color: white;
+      padding: 25px 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 32px;
+      margin-bottom: 8px;
+    }
+
+    header p {
+      font-size: 15px;
+    }
+
+    .container {
+      padding: 20px;
+      max-width: 600px;
+      margin: auto;
+    }
+
+    .welcome {
+      background: white;
+      padding: 20px;
+      border-radius: 15px;
+      margin-bottom: 20px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+      text-align: center;
+    }
+
+    .welcome h2 {
+      margin-bottom: 10px;
+      color: #0b6b4b;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+
+    .card {
+      background: white;
+      padding: 22px 10px;
+      border-radius: 15px;
+      text-align: center;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+      cursor: pointer;
+    }
+
+    .card:hover {
+      transform: scale(1.02);
+    }
+
+    .icon {
+      font-size: 35px;
+      margin-bottom: 10px;
+    }
+
+    .card h3 {
+      font-size: 17px;
+      color: #0b6b4b;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px 10px;
+      color: #777;
+      font-size: 13px;
+    }
+  </style>
 </head>
+
 <body>
-  <h1>NOOR</h1>
-  <p>Welcome to NOOR Islamic App</p>
+
+  <header>
+    <h1>☪ NOOR</h1>
+    <p>আপনার ইসলামিক জীবনকে আরও সুন্দর করুন</p>
+  </header>
+
+  <div class="container">
+
+    <div class="welcome">
+      <h2>আসসালামু আলাইকুম</h2>
+      <p>NOOR অ্যাপে আপনাকে স্বাগতম</p>
+    </div>
+
+    <div class="cards">
+
+      <div class="card" onclick="alert('কুরআন বিভাগ শীঘ্রই আসছে')">
+        <div class="icon">📖</div>
+        <h3>আল-কুরআন</h3>
+      </div>
+
+      <div class="card" onclick="alert('হাদিস বিভাগ শীঘ্রই আসছে')">
+        <div class="icon">📚</div>
+        <h3>হাদিস</h3>
+      </div>
+
+      <div class="card" onclick="alert('নামাজের সময় বিভাগ শীঘ্রই আসছে')">
+        <div class="icon">🕌</div>
+        <h3>নামাজের সময়</h3>
+      </div>
+
+      <div class="card" onclick="alert('দোয়া ও যিকির বিভাগ শীঘ্রই আসছে')">
+        <div class="icon">🤲</div>
+        <h3>দোয়া ও যিকির</h3>
+      </div>
+
+      <div class="card" onclick="alert('তাসবিহ বিভাগ শীঘ্রই আসছে')">
+        <div class="icon">📿</div>
+        <h3>তাসবিহ</h3>
+      </div>
+
+      <div class="card" onclick="alert('ইসলামিক ক্যালেন্ডার শীঘ্রই আসছে')">
+        <div class="icon">🌙</div>
+        <h3>ইসলামিক ক্যালেন্ডার</h3>
+      </div>
+
+    </div>
+
+  </div>
+
+  <footer>
+    © 2026 NOOR Islamic App
+  </footer>
+
 </body>
 </html>
