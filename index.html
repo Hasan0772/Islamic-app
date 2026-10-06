@@ -1,150 +1,702 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NOOR - Islamic App</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NOOR - Islamic App</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
 
-    body {
-      font-family: Arial, sans-serif;
-      background: #f4f8f5;
-      color: #173b2d;
-    }
+body{
+  font-family:Arial,"Noto Sans Bengali",sans-serif;
+  background:#f3f8f5;
+  color:#173b2d;
+  min-height:100vh;
+}
 
-    header {
-      background: #0b6b4b;
-      color: white;
-      padding: 25px 20px;
-      text-align: center;
-    }
+header{
+  background:linear-gradient(135deg,#075e45,#0b8060);
+  color:white;
+  padding:22px 18px;
+  text-align:center;
+  box-shadow:0 3px 12px rgba(0,0,0,.15);
+}
 
-    header h1 {
-      font-size: 32px;
-      margin-bottom: 8px;
-    }
+header h1{
+  font-size:30px;
+  margin-bottom:5px;
+}
 
-    header p {
-      font-size: 15px;
-    }
+header p{
+  font-size:14px;
+  opacity:.9;
+}
 
-    .container {
-      padding: 20px;
-      max-width: 600px;
-      margin: auto;
-    }
+.container{
+  max-width:600px;
+  margin:auto;
+  padding:18px;
+}
 
-    .welcome {
-      background: white;
-      padding: 20px;
-      border-radius: 15px;
-      margin-bottom: 20px;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.08);
-      text-align: center;
-    }
+.card{
+  background:white;
+  border-radius:20px;
+  padding:22px;
+  margin-bottom:18px;
+  box-shadow:0 5px 18px rgba(0,0,0,.08);
+}
 
-    .welcome h2 {
-      margin-bottom: 10px;
-      color: #0b6b4b;
-    }
+.card h2{
+  margin-bottom:10px;
+  color:#075e45;
+}
 
-    .cards {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 15px;
-    }
+.welcome{
+  text-align:center;
+}
 
-    .card {
-      background: white;
-      padding: 22px 10px;
-      border-radius: 15px;
-      text-align: center;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.08);
-      cursor: pointer;
-    }
+.welcome .arabic{
+  font-size:28px;
+  line-height:1.7;
+  margin:12px 0;
+}
 
-    .card:hover {
-      transform: scale(1.02);
-    }
+.welcome p{
+  color:#567065;
+}
 
-    .icon {
-      font-size: 35px;
-      margin-bottom: 10px;
-    }
+.menu{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin-top:18px;
+}
 
-    .card h3 {
-      font-size: 17px;
-      color: #0b6b4b;
-    }
+.menu button{
+  border:0;
+  border-radius:15px;
+  padding:17px 10px;
+  background:#e4f3ed;
+  color:#075e45;
+  font-size:16px;
+  font-weight:bold;
+  cursor:pointer;
+}
 
-    footer {
-      text-align: center;
-      padding: 30px 10px;
-      color: #777;
-      font-size: 13px;
-    }
-  </style>
+.menu button:active{
+  transform:scale(.97);
+}
+
+.tasbih{
+  text-align:center;
+}
+
+.dhikr{
+  background:#edf8f3;
+  border-radius:16px;
+  padding:18px;
+  margin:12px 0;
+}
+
+.dhikr .arabic{
+  font-size:27px;
+  line-height:1.8;
+}
+
+.dhikr .meaning{
+  margin-top:8px;
+  color:#61756d;
+}
+
+.count{
+  font-size:72px;
+  font-weight:bold;
+  color:#075e45;
+  margin:15px 0 5px;
+}
+
+.targetText{
+  color:#71847d;
+  margin-bottom:15px;
+}
+
+.bigButton{
+  width:180px;
+  height:180px;
+  border-radius:50%;
+  border:10px solid #d5eee5;
+  background:linear-gradient(145deg,#087356,#0a906c);
+  color:white;
+  font-size:25px;
+  font-weight:bold;
+  box-shadow:0 8px 20px rgba(0,100,70,.25);
+  cursor:pointer;
+  user-select:none;
+  -webkit-tap-highlight-color:transparent;
+}
+
+.bigButton:active{
+  transform:scale(.94);
+}
+
+.controls{
+  display:flex;
+  gap:10px;
+  justify-content:center;
+  flex-wrap:wrap;
+  margin-top:22px;
+}
+
+.controls button,
+select{
+  border:0;
+  border-radius:12px;
+  padding:12px 18px;
+  background:#e3f1eb;
+  color:#075e45;
+  font-weight:bold;
+  font-size:15px;
+}
+
+.reset{
+  background:#ffe7e7 !important;
+  color:#a33 !important;
+}
+
+.progress{
+  width:100%;
+  height:10px;
+  background:#e5eee9;
+  border-radius:20px;
+  overflow:hidden;
+  margin-top:18px;
+}
+
+.progressBar{
+  height:100%;
+  width:0%;
+  background:#0a8060;
+  transition:.25s;
+}
+
+.zikirList{
+  list-style:none;
+}
+
+.zikirList li{
+  background:#f2f8f5;
+  padding:14px;
+  border-radius:12px;
+  margin:8px 0;
+  line-height:1.6;
+}
+
+.bottomNav{
+  position:sticky;
+  bottom:0;
+  background:white;
+  border-top:1px solid #ddd;
+  display:flex;
+  justify-content:space-around;
+  padding:10px 5px;
+  margin-top:15px;
+}
+
+.bottomNav button{
+  background:none;
+  border:0;
+  color:#60756d;
+  font-size:13px;
+  cursor:pointer;
+}
+
+.bottomNav button.active{
+  color:#087356;
+  font-weight:bold;
+}
+
+.page{
+  display:none;
+}
+
+.page.active{
+  display:block;
+}
+
+footer{
+  text-align:center;
+  padding:25px 10px;
+  color:#81928c;
+  font-size:13px;
+}
+
+/* Dark mode */
+body.dark{
+  background:#101916;
+  color:#e8f4ef;
+}
+
+body.dark .card,
+body.dark .bottomNav{
+  background:#19231f;
+}
+
+body.dark .card h2,
+body.dark .menu button,
+body.dark .controls button,
+body.dark select{
+  color:#8de0c0;
+}
+
+body.dark .menu button,
+body.dark .controls button,
+body.dark select,
+body.dark .dhikr,
+body.dark .zikirList li{
+  background:#23332d;
+}
+
+body.dark .welcome p,
+body.dark .meaning,
+body.dark .targetText{
+  color:#a8bdb5;
+}
+
+body.dark .bottomNav{
+  border-color:#33443e;
+}
+
+body.dark .bottomNav button{
+  color:#aabbb5;
+}
+
+body.dark .bottomNav button.active{
+  color:#78d5b4;
+}
+
+@media(max-width:400px){
+  .count{
+    font-size:60px;
+  }
+
+  .bigButton{
+    width:160px;
+    height:160px;
+  }
+
+  .welcome .arabic{
+    font-size:24px;
+  }
+}
+</style>
 </head>
 
 <body>
 
-  <header>
-    <h1>☪ NOOR</h1>
-    <p>আপনার ইসলামিক জীবনকে আরও সুন্দর করুন</p>
-  </header>
+<header>
+  <h1>🌙 NOOR</h1>
+  <p>আপনার ইসলামিক সঙ্গী</p>
+</header>
 
-  <div class="container">
+<main class="container">
 
-    <div class="welcome">
-      <h2>আসসালামু আলাইকুম</h2>
-      <p>NOOR অ্যাপে আপনাকে স্বাগতম</p>
+<!-- HOME -->
+<section id="home" class="page active">
+
+  <div class="card welcome">
+    <h2>আসসালামু আলাইকুম 🤍</h2>
+
+    <div class="arabic">
+      وَذَكِّرْ فَإِنَّ الذِّكْرَىٰ تَنفَعُ الْمُؤْمِنِينَ
     </div>
 
-    <div class="cards">
+    <p>
+      স্মরণ করিয়ে দিন, নিশ্চয়ই স্মরণ মুমিনদের উপকার করে।
+    </p>
+  </div>
 
-      <div class="card" onclick="alert('কুরআন বিভাগ শীঘ্রই আসছে')">
-        <div class="icon">📖</div>
-        <h3>আল-কুরআন</h3>
+  <div class="card">
+    <h2>📿 আজকের আমল</h2>
+
+    <div class="menu">
+      <button onclick="showPage('tasbih')">
+        📿<br>তাসবিহ
+      </button>
+
+      <button onclick="showPage('dhikr')">
+        🤲<br>দৈনিক যিকির
+      </button>
+
+      <button onclick="showPage('about')">
+        🌙<br>NOOR
+      </button>
+
+      <button onclick="toggleDark()">
+        🌓<br>ডার্ক মোড
+      </button>
+    </div>
+  </div>
+
+</section>
+
+
+<!-- TASBIH -->
+<section id="tasbih" class="page">
+
+  <div class="card tasbih">
+
+    <h2>📿 ডিজিটাল তাসবিহ</h2>
+
+    <div class="dhikr">
+      <div class="arabic" id="dhikrArabic">
+        سُبْحَانَ اللَّهِ
       </div>
 
-      <div class="card" onclick="alert('হাদিস বিভাগ শীঘ্রই আসছে')">
-        <div class="icon">📚</div>
-        <h3>হাদিস</h3>
+      <div class="meaning" id="dhikrMeaning">
+        সুবহানাল্লাহ
       </div>
+    </div>
 
-      <div class="card" onclick="alert('নামাজের সময় বিভাগ শীঘ্রই আসছে')">
-        <div class="icon">🕌</div>
-        <h3>নামাজের সময়</h3>
-      </div>
+    <div class="count" id="count">
+      0
+    </div>
 
-      <div class="card" onclick="alert('দোয়া ও যিকির বিভাগ শীঘ্রই আসছে')">
-        <div class="icon">🤲</div>
-        <h3>দোয়া ও যিকির</h3>
-      </div>
+    <div class="targetText">
+      লক্ষ্য: <span id="target">33</span>
+    </div>
 
-      <div class="card" onclick="alert('তাসবিহ বিভাগ শীঘ্রই আসছে')">
-        <div class="icon">📿</div>
-        <h3>তাসবিহ</h3>
-      </div>
+    <div class="progress">
+      <div class="progressBar" id="progressBar"></div>
+    </div>
 
-      <div class="card" onclick="alert('ইসলামিক ক্যালেন্ডার শীঘ্রই আসছে')">
-        <div class="icon">🌙</div>
-        <h3>ইসলামিক ক্যালেন্ডার</h3>
-      </div>
+    <br>
+
+    <button class="bigButton" onclick="countTasbih()">
+      TAP
+    </button>
+
+    <div class="controls">
+
+      <select id="targetSelect" onchange="changeTarget()">
+        <option value="33">৩৩ বার</option>
+        <option value="99">৯৯ বার</option>
+        <option value="100">১০০ বার</option>
+        <option value="500">৫০০ বার</option>
+        <option value="1000">১০০০ বার</option>
+      </select>
+
+      <button onclick="changeDhikr()">
+        🔄 যিকির পরিবর্তন
+      </button>
+
+      <button class="reset" onclick="resetTasbih()">
+        ♻️ Reset
+      </button>
 
     </div>
 
   </div>
 
-  <footer>
-    © 2026 NOOR Islamic App
-  </footer>
+</section>
+
+
+<!-- DAILY DHIKR -->
+<section id="dhikr" class="page">
+
+  <div class="card">
+
+    <h2>🤲 দৈনিক যিকির</h2>
+
+    <ul class="zikirList">
+
+      <li>
+        <b>سُبْحَانَ اللَّهِ</b><br>
+        সুবহানাল্লাহ — আল্লাহ পবিত্র।
+      </li>
+
+      <li>
+        <b>الْحَمْدُ لِلَّهِ</b><br>
+        আলহামদুলিল্লাহ — সমস্ত প্রশংসা আল্লাহর।
+      </li>
+
+      <li>
+        <b>اللَّهُ أَكْبَرُ</b><br>
+        আল্লাহু আকবার — আল্লাহ সর্বশ্রেষ্ঠ।
+      </li>
+
+      <li>
+        <b>لَا إِلٰهَ إِلَّا اللَّهُ</b><br>
+        লা ইলাহা ইল্লাল্লাহ — আল্লাহ ছাড়া কোনো উপাস্য নেই।
+      </li>
+
+      <li>
+        <b>أَسْتَغْفِرُ اللَّهَ</b><br>
+        আস্তাগফিরুল্লাহ — আমি আল্লাহর কাছে ক্ষমা চাই।
+      </li>
+
+      <li>
+        <b>سُبْحَانَ اللَّهِ وَبِحَمْدِهِ</b><br>
+        সুবহানাল্লাহি ওয়া বিহামদিহি।
+      </li>
+
+    </ul>
+
+  </div>
+
+</section>
+
+
+<!-- ABOUT -->
+<section id="about" class="page">
+
+  <div class="card">
+
+    <h2>🌙 NOOR সম্পর্কে</h2>
+
+    <p style="line-height:1.8">
+      NOOR একটি সহজ ইসলামিক অ্যাপ।
+      এর উদ্দেশ্য হলো দৈনন্দিন যিকির ও ইবাদতের
+      জন্য একটি সুন্দর ও সহজ পরিবেশ তৈরি করা।
+    </p>
+
+    <br>
+
+    <p style="line-height:1.8">
+      📿 ডিজিটাল তাসবিহ ব্যবহার করে সহজেই
+      যিকির গণনা করতে পারবেন।
+    </p>
+
+  </div>
+
+</section>
+
+</main>
+
+
+<!-- BOTTOM NAVIGATION -->
+<nav class="bottomNav">
+
+  <button id="navHome" class="active" onclick="showPage('home')">
+    🏠<br>হোম
+  </button>
+
+  <button id="navTasbih" onclick="showPage('tasbih')">
+    📿<br>তাসবিহ
+  </button>
+
+  <button id="navDhikr" onclick="showPage('dhikr')">
+    🤲<br>যিকির
+  </button>
+
+  <button id="navAbout" onclick="showPage('about')">
+    🌙<br>NOOR
+  </button>
+
+</nav>
+
+<footer>
+  © 2026 NOOR Islamic App
+</footer>
+
+
+<script>
+
+let count = Number(localStorage.getItem("noorCount")) || 0;
+
+let target = Number(localStorage.getItem("noorTarget")) || 33;
+
+let dhikrIndex =
+  Number(localStorage.getItem("noorDhikrIndex")) || 0;
+
+
+const dhikrs = [
+
+  {
+    arabic:"سُبْحَانَ اللَّهِ",
+    meaning:"সুবহানাল্লাহ"
+  },
+
+  {
+    arabic:"الْحَمْدُ لِلَّهِ",
+    meaning:"আলহামদুলিল্লাহ"
+  },
+
+  {
+    arabic:"اللَّهُ أَكْبَرُ",
+    meaning:"আল্লাহু আকবার"
+  },
+
+  {
+    arabic:"لَا إِلٰهَ إِلَّا اللَّهُ",
+    meaning:"লা ইলাহা ইল্লাল্লাহ"
+  },
+
+  {
+    arabic:"أَسْتَغْفِرُ اللَّهَ",
+    meaning:"আস্তাগফিরুল্লাহ"
+  }
+
+];
+
+
+function updateScreen(){
+
+  document.getElementById("count").innerText = count;
+
+  document.getElementById("target").innerText = target;
+
+  document.getElementById("targetSelect").value = target;
+
+  let percentage =
+    Math.min((count / target) * 100,100);
+
+  document.getElementById("progressBar").style.width =
+    percentage + "%";
+
+  document.getElementById("dhikrArabic").innerText =
+    dhikrs[dhikrIndex].arabic;
+
+  document.getElementById("dhikrMeaning").innerText =
+    dhikrs[dhikrIndex].meaning;
+
+  localStorage.setItem("noorCount",count);
+
+  localStorage.setItem("noorTarget",target);
+
+  localStorage.setItem("noorDhikrIndex",dhikrIndex);
+}
+
+
+function countTasbih(){
+
+  if(navigator.vibrate){
+    navigator.vibrate(30);
+  }
+
+  count++;
+
+  if(count >= target){
+
+    if(navigator.vibrate){
+      navigator.vibrate([100,50,100]);
+    }
+
+    alert("আলহামদুলিল্লাহ! লক্ষ্য পূর্ণ হয়েছে 🤲");
+  }
+
+  updateScreen();
+}
+
+
+function resetTasbih(){
+
+  if(confirm("তাসবিহ কাউন্ট ০ করতে চান?")){
+
+    count = 0;
+
+    updateScreen();
+  }
+}
+
+
+function changeTarget(){
+
+  target =
+    Number(document.getElementById("targetSelect").value);
+
+  count = 0;
+
+  updateScreen();
+}
+
+
+function changeDhikr(){
+
+  dhikrIndex++;
+
+  if(dhikrIndex >= dhikrs.length){
+    dhikrIndex = 0;
+  }
+
+  count = 0;
+
+  updateScreen();
+}
+
+
+function showPage(page){
+
+  document.querySelectorAll(".page")
+    .forEach(function(section){
+      section.classList.remove("active");
+    });
+
+  document.getElementById(page)
+    .classList.add("active");
+
+
+  document.querySelectorAll(".bottomNav button")
+    .forEach(function(button){
+      button.classList.remove("active");
+    });
+
+
+  if(page === "home"){
+    document.getElementById("navHome")
+      .classList.add("active");
+  }
+
+  if(page === "tasbih"){
+    document.getElementById("navTasbih")
+      .classList.add("active");
+  }
+
+  if(page === "dhikr"){
+    document.getElementById("navDhikr")
+      .classList.add("active");
+  }
+
+  if(page === "about"){
+    document.getElementById("navAbout")
+      .classList.add("active");
+  }
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+}
+
+
+function toggleDark(){
+
+  document.body.classList.toggle("dark");
+
+  if(document.body.classList.contains("dark")){
+
+    localStorage.setItem("noorDark","1");
+
+  }else{
+
+    localStorage.setItem("noorDark","0");
+  }
+}
+
+
+if(localStorage.getItem("noorDark") === "1"){
+
+  document.body.classList.add("dark");
+}
+
+
+updateScreen();
+
+</script>
 
 </body>
-</html>
+    </html>
