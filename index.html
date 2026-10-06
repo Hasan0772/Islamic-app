@@ -22,23 +22,25 @@ body{
 header{
   background:linear-gradient(135deg,#075e45,#0b8f68);
   color:white;
-  padding:24px 18px;
+  padding:25px 18px;
   text-align:center;
-  border-radius:0 0 25px 25px;
+  border-radius:0 0 28px 28px;
 }
 
-header h1{
-  font-size:32px;
-  margin-bottom:6px;
+.logo{
+  font-size:38px;
+  font-weight:bold;
+  letter-spacing:2px;
 }
 
-header p{
+.subtitle{
+  margin-top:6px;
   font-size:15px;
-  opacity:.9;
+  opacity:.95;
 }
 
 .container{
-  max-width:600px;
+  max-width:650px;
   margin:auto;
   padding:18px;
 }
@@ -48,188 +50,218 @@ header p{
   border-radius:20px;
   padding:20px;
   margin-bottom:16px;
-  box-shadow:0 5px 18px rgba(0,0,0,.08);
+  box-shadow:0 5px 18px rgba(0,0,0,.07);
 }
 
 .card h2{
-  color:#075e45;
-  margin-bottom:10px;
+  color:#087653;
+  margin-bottom:12px;
 }
 
-.card p{
-  line-height:1.7;
-}
-
-.btn{
-  border:none;
-  border-radius:14px;
-  padding:14px 18px;
-  background:#087f5b;
-  color:white;
-  font-size:16px;
-  cursor:pointer;
-  margin:5px;
-}
-
-.btn:active{
-  transform:scale(.97);
-}
-
-.btn.secondary{
-  background:#e8f3ef;
-  color:#075e45;
-}
-
-nav{
-  position:fixed;
-  bottom:0;
-  left:0;
-  right:0;
-  background:white;
-  border-top:1px solid #ddd;
-  display:flex;
-  justify-content:space-around;
-  padding:10px 5px;
-  z-index:10;
-}
-
-nav button{
-  border:none;
-  background:none;
-  color:#527066;
-  font-size:13px;
-  padding:6px;
-  cursor:pointer;
-}
-
-nav button.active{
-  color:#087f5b;
-  font-weight:bold;
-}
-
-.page{
-  display:none;
-  padding-bottom:90px;
-}
-
-.page.active{
-  display:block;
-}
-
-/* Tasbih */
-
-.tasbih-box{
+.greeting{
   text-align:center;
 }
 
-.counter{
-  width:220px;
-  height:220px;
+.greeting h1{
+  font-size:25px;
+  margin-bottom:8px;
+}
+
+.date{
+  color:#687b73;
+  font-size:14px;
+}
+
+.section-title{
+  font-size:21px;
+  margin:22px 0 12px;
+  color:#075e45;
+}
+
+.prayer-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+}
+
+.prayer{
+  background:#eef8f3;
+  border-radius:16px;
+  padding:15px;
+  text-align:center;
+}
+
+.prayer strong{
+  display:block;
+  font-size:18px;
+  color:#075e45;
+  margin-bottom:7px;
+}
+
+.prayer span{
+  font-size:20px;
+  font-weight:bold;
+}
+
+.tasbih{
+  text-align:center;
+}
+
+.tasbih-count{
+  width:190px;
+  height:190px;
   border-radius:50%;
-  margin:25px auto;
+  margin:20px auto;
   background:linear-gradient(135deg,#075e45,#0b9b70);
   color:white;
   display:flex;
+  flex-direction:column;
   align-items:center;
   justify-content:center;
-  flex-direction:column;
-  box-shadow:0 10px 30px rgba(0,100,70,.25);
+  box-shadow:0 10px 25px rgba(7,94,69,.25);
 }
 
-.counter-number{
+.tasbih-count .number{
   font-size:58px;
   font-weight:bold;
 }
 
-.counter-label{
+.tasbih-count small{
   font-size:14px;
-  opacity:.9;
 }
 
-.big-btn{
-  width:180px;
-  height:180px;
-  border-radius:50%;
-  border:none;
-  background:#087f5b;
-  color:white;
-  font-size:24px;
+.dhikr{
+  background:#f0f8f4;
+  border-radius:14px;
+  padding:13px;
+  margin-bottom:12px;
+  font-size:19px;
+  color:#075e45;
   font-weight:bold;
-  box-shadow:0 8px 20px rgba(0,0,0,.15);
+}
+
+.buttons{
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+button{
+  border:none;
+  border-radius:14px;
+  padding:13px 20px;
+  font-size:16px;
+  font-weight:bold;
   cursor:pointer;
 }
 
-.big-btn:active{
-  transform:scale(.94);
+.count-btn{
+  background:#087653;
+  color:white;
+  min-width:170px;
+  font-size:20px;
+  padding:17px;
 }
 
-.zikr-select{
-  width:100%;
-  padding:14px;
-  border-radius:12px;
-  border:1px solid #cbded6;
-  font-size:16px;
-  background:white;
-  color:#173b2d;
-  margin-top:8px;
+.reset-btn{
+  background:#e8eeee;
+  color:#31554a;
 }
 
-.target{
-  margin-top:15px;
-  font-size:15px;
-  color:#527066;
-}
-
-.progress{
-  height:10px;
-  background:#e3eee9;
-  border-radius:20px;
-  overflow:hidden;
-  margin-top:10px;
-}
-
-.progress-bar{
-  height:100%;
-  width:0%;
-  background:#087f5b;
-  transition:.2s;
-}
-
-.ayah{
-  text-align:center;
-  font-size:22px;
-  line-height:2;
+.small-btn{
+  background:#e9f6f1;
   color:#075e45;
 }
 
-.arabic{
-  direction:rtl;
-  font-size:27px;
-  line-height:2;
-  margin-bottom:12px;
+.azkar{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
 }
 
-.time{
+.azkar button{
+  text-align:left;
+  background:#f1f8f5;
+  color:#075e45;
+}
+
+.azkar-content{
+  display:none;
+  background:#fff;
+  border:1px solid #dcebe5;
+  padding:15px;
+  border-radius:12px;
+  line-height:1.8;
+}
+
+.qibla{
   text-align:center;
-  font-size:30px;
-  font-weight:bold;
-  color:#087f5b;
 }
 
-.list{
-  list-style:none;
-}
-
-.list li{
-  padding:13px;
-  border-bottom:1px solid #edf2ef;
+.compass{
+  width:130px;
+  height:130px;
+  margin:15px auto;
+  border:8px solid #dcebe5;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:45px;
 }
 
 footer{
   text-align:center;
-  padding:20px;
-  color:#6d8279;
+  padding:25px 15px;
+  color:#6d8078;
   font-size:13px;
+}
+
+.nav{
+  position:sticky;
+  bottom:0;
+  background:white;
+  border-top:1px solid #e1ebe7;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  padding:8px;
+  z-index:10;
+}
+
+.nav button{
+  background:white;
+  color:#49675d;
+  padding:9px 3px;
+  font-size:12px;
+}
+
+.nav button.active{
+  color:#087653;
+  font-weight:bold;
+}
+
+.hidden{
+  display:none;
+}
+
+@media(max-width:450px){
+  .prayer-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .logo{
+    font-size:34px;
+  }
+
+  .tasbih-count{
+    width:170px;
+    height:170px;
+  }
+
+  .tasbih-count .number{
+    font-size:52px;
+  }
 }
 </style>
 </head>
@@ -237,484 +269,340 @@ footer{
 <body>
 
 <header>
-  <h1>☪ NOOR</h1>
-  <p>আপনার দৈনন্দিন ইসলামিক সহায়ক</p>
+  <div class="logo">☪ NOOR</div>
+  <div class="subtitle">আপনার দৈনন্দিন ইসলামিক সঙ্গী</div>
 </header>
 
-
-<!-- HOME -->
-<section id="home" class="page active">
 <div class="container">
 
-  <div class="card">
-    <h2>🌙 আসসালামু আলাইকুম</h2>
-    <p>
-      NOOR অ্যাপে আপনাকে স্বাগতম।  
-      প্রতিদিনের ইবাদত ও যিকির সহজভাবে সম্পন্ন করুন।
-    </p>
-  </div>
+  <!-- HOME -->
+  <section id="home">
 
-  <div class="card">
-    <h2>📖 আজকের আয়াত</h2>
+    <div class="card greeting">
+      <h1>আসসালামু আলাইকুম 🌙</h1>
+      <p>NOOR-এ আপনাকে স্বাগতম</p>
+      <div class="date" id="today"></div>
+    </div>
 
-    <div class="ayah">
-      <div class="arabic">
-        فَاذْكُرُونِي أَذْكُرْكُمْ
+    <h2 class="section-title">🕌 নামাজের সময়</h2>
+
+    <div class="card">
+      <div class="prayer-grid">
+        <div class="prayer">
+          <strong>ফজর</strong>
+          <span>৪:৩০</span>
+        </div>
+
+        <div class="prayer">
+          <strong>যোহর</strong>
+          <span>১২:১৫</span>
+        </div>
+
+        <div class="prayer">
+          <strong>আসর</strong>
+          <span>৪:৩০</span>
+        </div>
+
+        <div class="prayer">
+          <strong>মাগরিব</strong>
+          <span>৬:০০</span>
+        </div>
+
+        <div class="prayer">
+          <strong>এশা</strong>
+          <span>৭:৩০</span>
+        </div>
+
+        <div class="prayer">
+          <strong>জুমা</strong>
+          <span>১:১৫</span>
+        </div>
       </div>
 
-      <p>
-        “অতএব তোমরা আমাকে স্মরণ করো,
-        আমিও তোমাদের স্মরণ করব।”
-      </p>
-
-      <p>
-        — সূরা আল-বাকারা ২:১৫২
+      <p style="margin-top:12px;text-align:center;font-size:12px;color:#71847d;">
+        * সময়গুলো উদাহরণ হিসেবে দেওয়া হয়েছে।
       </p>
     </div>
-  </div>
 
-  <div class="card">
-    <h2>🕋 আজকের আমল</h2>
-    <ul class="list">
-      <li>🤲 পাঁচ ওয়াক্ত নামাজ আদায় করুন</li>
-      <li>📖 কুরআন তিলাওয়াত করুন</li>
-      <li>📿 বেশি বেশি যিকির করুন</li>
-      <li>❤️ মানুষের সাথে ভালো ব্যবহার করুন</li>
-    </ul>
-  </div>
+    <h2 class="section-title">📖 আজকের দোয়া</h2>
 
-</div>
-</section>
-
-
-<!-- TASBIH -->
-<section id="tasbih" class="page">
-<div class="container">
-
-  <div class="card tasbih-box">
-
-    <h2>📿 তাসবিহ</h2>
-
-    <p>যিকির নির্বাচন করুন</p>
-
-    <select id="zikrSelect" class="zikr-select">
-      <option value="سُبْحَانَ اللَّهِ">سُبْحَانَ اللَّهِ — সুবহানাল্লাহ</option>
-      <option value="الْحَمْدُ لِلَّهِ">الْحَمْدُ لِلَّهِ — আলহামদুলিল্লাহ</option>
-      <option value="اللَّهُ أَكْبَرُ">اللَّهُ أَكْبَرُ — আল্লাহু আকবার</option>
-      <option value="أَسْتَغْفِرُ اللَّهَ">أَسْتَغْفِرُ اللَّهَ — আস্তাগফিরুল্লাহ</option>
-      <option value="لَا إِلٰهَ إِلَّا اللَّهُ">لَا إِلٰهَ إِلَّا اللَّهُ — লা ইলাহা ইল্লাল্লাহ</option>
-      <option value="اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ">দরুদ শরীফ</option>
-    </select>
-
-    <div class="target">
-      লক্ষ্য: <b id="targetText">33</b>
+    <div class="card">
+      <p style="font-size:21px;line-height:1.8;text-align:center;">
+        رَبِّ زِدْنِي عِلْمًا
+      </p>
+      <p style="text-align:center;margin-top:10px;">
+        “হে আমার রব, আমার জ্ঞান বৃদ্ধি করুন।”
+      </p>
     </div>
 
-    <div class="counter">
-      <div class="counter-number" id="count">0</div>
-      <div class="counter-label">বার</div>
+  </section>
+
+
+  <!-- TASBIH -->
+  <section id="tasbihSection" class="hidden">
+
+    <div class="card tasbih">
+
+      <h2>📿 ডিজিটাল তাসবিহ</h2>
+
+      <p style="color:#71847d;">
+        নিচের বোতামে চাপ দিয়ে তাসবিহ গণনা করুন
+      </p>
+
+      <div class="dhikr" id="dhikrText">
+        সুবহানাল্লাহ
+      </div>
+
+      <div class="tasbih-count">
+        <div class="number" id="count">0</div>
+        <small>বার</small>
+      </div>
+
+      <div class="buttons">
+        <button class="count-btn" onclick="addCount()">
+          📿 গণনা করুন
+        </button>
+
+        <button class="reset-btn" onclick="resetCount()">
+          ↻ রিসেট
+        </button>
+      </div>
+
+      <div style="margin-top:18px;">
+        <button class="small-btn" onclick="changeDhikr('সুবহানাল্লাহ')">
+          সুবহানাল্লাহ
+        </button>
+
+        <button class="small-btn" onclick="changeDhikr('আলহামদুলিল্লাহ')">
+          আলহামদুলিল্লাহ
+        </button>
+
+        <button class="small-btn" onclick="changeDhikr('আল্লাহু আকবার')">
+          আল্লাহু আকবার
+        </button>
+      </div>
+
     </div>
 
-    <button class="big-btn" onclick="addCount()">
-      📿<br>
-      জিকির
-    </button>
-
-    <br><br>
-
-    <button class="btn secondary" onclick="resetCount()">
-      🔄 রিসেট
-    </button>
-
-    <button class="btn secondary" onclick="changeTarget()">
-      🎯 লক্ষ্য পরিবর্তন
-    </button>
-
-    <div class="progress">
-      <div class="progress-bar" id="progressBar"></div>
+    <div class="card">
+      <h2>📿 তাসবিহের ফজিলত</h2>
+      <p style="line-height:1.8;">
+        আল্লাহর জিকির মানুষের অন্তরকে প্রশান্ত করে।
+        নিয়মিত তাসবিহ ও জিকিরের মাধ্যমে আল্লাহকে স্মরণ করা যায়।
+      </p>
     </div>
 
-    <p id="message" style="margin-top:15px;"></p>
-
-  </div>
-
-  <div class="card">
-    <h2>📿 নির্বাচিত যিকির</h2>
-    <p id="selectedZikr" class="ayah">
-      سُبْحَانَ اللَّهِ
-    </p>
-  </div>
-
-</div>
-</section>
+  </section>
 
 
-<!-- QURAN -->
-<section id="quran" class="page">
-<div class="container">
+  <!-- AZKAR -->
+  <section id="azkarSection" class="hidden">
 
-  <div class="card">
-    <h2>📖 কুরআন</h2>
+    <div class="card">
+      <h2>🤲 দৈনিক যিকির ও দোয়া</h2>
 
-    <div class="arabic">
-      الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ
+      <div class="azkar">
+
+        <button onclick="toggleAzkar('a1')">
+          🌿 সকাল-সন্ধ্যার যিকির
+        </button>
+
+        <div id="a1" class="azkar-content">
+          سُبْحَانَ اللَّهِ وَبِحَمْدِهِ
+          <br><br>
+          সুবহানাল্লাহি ওয়া বিহামদিহি।
+        </div>
+
+
+        <button onclick="toggleAzkar('a2')">
+          🤲 ঘুমানোর আগে
+        </button>
+
+        <div id="a2" class="azkar-content">
+          بِاسْمِكَ اللَّهُمَّ أَمُوتُ وَأَحْيَا
+          <br><br>
+          হে আল্লাহ! আপনার নামেই আমি মৃত্যুবরণ করি এবং জীবিত হই।
+        </div>
+
+
+        <button onclick="toggleAzkar('a3')">
+          🕌 মসজিদে প্রবেশের দোয়া
+        </button>
+
+        <div id="a3" class="azkar-content">
+          اللَّهُمَّ افْتَحْ لِي أَبْوَابَ رَحْمَتِكَ
+          <br><br>
+          হে আল্লাহ! আমার জন্য আপনার রহমতের দরজাগুলো খুলে দিন।
+        </div>
+
+      </div>
     </div>
 
-    <p style="text-align:center;">
-      সমস্ত প্রশংসা আল্লাহর জন্য,
-      যিনি সকল জগতের প্রতিপালক।
-    </p>
+  </section>
 
-    <br>
 
-    <p style="text-align:center;">
-      সূরা আল-ফাতিহা — ১:২
-    </p>
-  </div>
+  <!-- QIBLA -->
+  <section id="qiblaSection" class="hidden">
 
-  <div class="card">
-    <h2>🤲 দোয়া</h2>
+    <div class="card qibla">
 
-    <div class="arabic">
-      رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً
-      وَفِي الْآخِرَةِ حَسَنَةً
+      <h2>🕋 কিবলা</h2>
+
+      <p>
+        কাবা শরিফের দিকে মুখ করে নামাজ আদায় করুন।
+      </p>
+
+      <div class="compass">
+        🕋
+      </div>
+
+      <p style="color:#71847d;">
+        কিবলার সঠিক দিক জানতে আপনার ফোনের কম্পাস ব্যবহার করুন।
+      </p>
+
     </div>
 
-    <p style="text-align:center;">
-      হে আমাদের রব! আমাদের দুনিয়াতে কল্যাণ দিন
-      এবং আখিরাতেও কল্যাণ দিন।
-    </p>
-  </div>
+  </section>
 
 </div>
-</section>
 
 
-<!-- PRAYER -->
-<section id="prayer" class="page">
-<div class="container">
+<!-- BOTTOM NAVIGATION -->
+<div class="nav">
 
-  <div class="card">
-    <h2>🕌 নামাজ</h2>
-
-    <ul class="list">
-      <li>🌅 ফজর — ২ রাকাত ফরজ</li>
-      <li>☀️ যোহর — ৪ রাকাত ফরজ</li>
-      <li>🌤️ আসর — ৪ রাকাত ফরজ</li>
-      <li>🌇 মাগরিব — ৩ রাকাত ফরজ</li>
-      <li>🌙 এশা — ৪ রাকাত ফরজ</li>
-    </ul>
-
-    <p style="margin-top:15px;">
-      সময় আপনার এলাকার উপর নির্ভর করে পরিবর্তিত হতে পারে।
-    </p>
-  </div>
-
-</div>
-</section>
-
-
-<!-- SETTINGS -->
-<section id="settings" class="page">
-<div class="container">
-
-  <div class="card">
-    <h2>⚙️ সেটিংস</h2>
-
-    <button class="btn" onclick="toggleDarkMode()">
-      🌙 ডার্ক মোড
-    </button>
-
-    <button class="btn secondary" onclick="resetAll()">
-      🗑️ তাসবিহ রিসেট
-    </button>
-  </div>
-
-  <div class="card">
-    <h2>☪ NOOR</h2>
-    <p>
-      একটি সহজ ইসলামিক অ্যাপ।
-    </p>
-    <br>
-    <p>
-      আল্লাহ আমাদের সবাইকে নেক আমল করার তাওফিক দিন। আমিন।
-    </p>
-  </div>
-
-</div>
-</section>
-
-
-<!-- NAVIGATION -->
-<nav>
-
-  <button class="active" onclick="showPage('home',this)">
+  <button id="homeBtn" class="active" onclick="showSection('home',this)">
     🏠<br>হোম
   </button>
 
-  <button onclick="showPage('tasbih',this)">
+  <button onclick="showSection('tasbihSection',this)">
     📿<br>তাসবিহ
   </button>
 
-  <button onclick="showPage('quran',this)">
-    📖<br>কুরআন
+  <button onclick="showSection('azkarSection',this)">
+    🤲<br>দোয়া
   </button>
 
-  <button onclick="showPage('prayer',this)">
-    🕌<br>নামাজ
+  <button onclick="showSection('qiblaSection',this)">
+    🕋<br>কিবলা
   </button>
 
-  <button onclick="showPage('settings',this)">
-    ⚙️<br>সেটিংস
-  </button>
+</div>
 
-</nav>
+
+<footer>
+  <p>NOOR Islamic App</p>
+  <p>আল্লাহ আমাদের সবাইকে হেদায়েত দান করুন। আমিন 🤲</p>
+</footer>
 
 
 <script>
 
-let count = Number(localStorage.getItem("noorCount")) || 0;
+/* DATE */
+const today = new Date();
 
-let target = Number(localStorage.getItem("noorTarget")) || 33;
+const options = {
+  weekday:"long",
+  year:"numeric",
+  month:"long",
+  day:"numeric"
+};
 
-let darkMode =
-  localStorage.getItem("noorDark") === "true";
-
-
-const countElement =
-  document.getElementById("count");
-
-const targetElement =
-  document.getElementById("targetText");
-
-const progressBar =
-  document.getElementById("progressBar");
-
-const message =
-  document.getElementById("message");
-
-const zikrSelect =
-  document.getElementById("zikrSelect");
-
-const selectedZikr =
-  document.getElementById("selectedZikr");
+document.getElementById("today").innerText =
+  today.toLocaleDateString("bn-BD",options);
 
 
-function updateDisplay(){
+/* TASBIH */
+let count = Number(localStorage.getItem("noorTasbihCount")) || 0;
 
-  countElement.textContent = count;
-
-  targetElement.textContent = target;
-
-  let percentage =
-    Math.min((count / target) * 100,100);
-
-  progressBar.style.width =
-    percentage + "%";
-
-  localStorage.setItem(
-    "noorCount",
-    count
-  );
-
-  localStorage.setItem(
-    "noorTarget",
-    target
-  );
-
-  if(count >= target){
-
-    message.textContent =
-      "🎉 আলহামদুলিল্লাহ! লক্ষ্য পূর্ণ হয়েছে।";
-
-  }else{
-
-    message.textContent =
-      "আরও " + (target-count) +
-      " বার বাকি।";
-  }
-}
-
+document.getElementById("count").innerText = count;
 
 function addCount(){
 
   count++;
 
-  updateDisplay();
+  document.getElementById("count").innerText = count;
+
+  localStorage.setItem("noorTasbihCount",count);
 
   if(navigator.vibrate){
     navigator.vibrate(40);
   }
 }
 
-
 function resetCount(){
+
+  if(confirm("তাসবিহের সংখ্যা রিসেট করতে চান?")){
+
+    count = 0;
+
+    document.getElementById("count").innerText = count;
+
+    localStorage.setItem("noorTasbihCount",count);
+  }
+}
+
+function changeDhikr(text){
+
+  document.getElementById("dhikrText").innerText = text;
 
   count = 0;
 
-  updateDisplay();
+  document.getElementById("count").innerText = count;
+
+  localStorage.setItem("noorTasbihCount",count);
 }
 
 
-function changeTarget(){
+/* NAVIGATION */
 
-  let newTarget =
-    prompt(
-      "নতুন লক্ষ্য লিখুন:",
-      target
-    );
+function showSection(id,button){
 
-  if(newTarget !== null){
+  const sections = [
+    "home",
+    "tasbihSection",
+    "azkarSection",
+    "qiblaSection"
+  ];
 
-    newTarget =
-      Number(newTarget);
+  sections.forEach(function(section){
 
-    if(newTarget > 0){
+    document.getElementById(section)
+      .classList.add("hidden");
 
-      target = newTarget;
+  });
 
-      count = 0;
+  document.getElementById(id)
+    .classList.remove("hidden");
 
-      updateDisplay();
-    }
-  }
-}
-
-
-zikrSelect.addEventListener(
-  "change",
-  function(){
-
-    selectedZikr.textContent =
-      this.value;
-
-    resetCount();
-  }
-);
-
-
-function showPage(pageId,button){
-
-  document
-    .querySelectorAll(".page")
-    .forEach(function(page){
-
-      page.classList.remove("active");
-
-    });
-
-  document
-    .getElementById(pageId)
-    .classList.add("active");
-
-
-  document
-    .querySelectorAll("nav button")
+  document.querySelectorAll(".nav button")
     .forEach(function(btn){
-
       btn.classList.remove("active");
-
     });
 
   button.classList.add("active");
 
-  window.scrollTo(0,0);
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
 }
 
 
-function toggleDarkMode(){
+/* AZKAR */
 
-  darkMode = !darkMode;
+function toggleAzkar(id){
 
-  localStorage.setItem(
-    "noorDark",
-    darkMode
-  );
+  const box = document.getElementById(id);
 
-  applyDarkMode();
-}
-
-
-function applyDarkMode(){
-
-  if(darkMode){
-
-    document.body.style.background =
-      "#101815";
-
-    document.body.style.color =
-      "#e6f5ee";
-
-    document
-      .querySelectorAll(".card")
-      .forEach(function(card){
-
-        card.style.background =
-          "#17221e";
-
-      });
-
-    document
-      .querySelectorAll("nav")
-      .forEach(function(nav){
-
-        nav.style.background =
-          "#17221e";
-
-      });
-
+  if(box.style.display === "block"){
+    box.style.display = "none";
   }else{
-
-    document.body.style.background =
-      "#f3f8f5";
-
-    document.body.style.color =
-      "#173b2d";
-
-    document
-      .querySelectorAll(".card")
-      .forEach(function(card){
-
-        card.style.background =
-          "white";
-
-      });
-
-    document
-      .querySelectorAll("nav")
-      .forEach(function(nav){
-
-        nav.style.background =
-          "white";
-
-      });
+    box.style.display = "block";
   }
+
 }
-
-
-function resetAll(){
-
-  count = 0;
-
-  target = 33;
-
-  localStorage.removeItem(
-    "noorCount"
-  );
-
-  localStorage.removeItem(
-    "noorTarget"
-  );
-
-  updateDisplay();
-}
-
-
-updateDisplay();
-
-applyDarkMode();
 
 </script>
 
 </body>
-      </html>
+  </html>
