@@ -1,0 +1,18 @@
+{
+  "background_color": "#ffffff",
+  "dir": "ltr",
+  "display": "standalone",
+  "name": "NOOR",
+  "orientation": "any",
+  "scope": "/",
+  "short_name": "NOOR",
+  "start_url": "/",
+  "theme_color": "#ffffff",
+  "id": "noor-islamic-app",
+  "description": "NOOR একটি ইসলামিক অ্যাপ। এখানে আল-কুরআন, রমজান, নামাজ শিক্ষা, কিবলা কম্পাস, তাসবিহ ও দরুদসহ প্রয়োজনীয় ইসলামিক ফিচার রয়েছে।",
+  "lang": "bn",
+  "categories": [
+    "books",
+    "books &amp; reference"
+  ]
+}
