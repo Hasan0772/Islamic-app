@@ -1,0 +1,12 @@
+{
+  "background_color": "#ffffff",
+  "dir": "ltr",
+  "display": "standalone",
+  "name": "NOOR",
+  "orientation": "any",
+  "scope": "/",
+  "short_name": "NOOR",
+  "start_url": "/",
+  "theme_color": "#ffffff",
+  "id": "noor-islamic-app"
+}
