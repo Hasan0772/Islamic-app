@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0b6b4f">
+<title>NOOR — Islamic App</title>
+<style>
+:root{--g:#0b6b4f;--g2:#064c39;--bg:#f5f8f6;--card:#fff;--text:#18231f;--muted:#66756f;--line:#dfe9e4;--gold:#c89b3c}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,"Noto Sans Bengali",sans-serif}
+button,input,select,textarea{font:inherit}button{cursor:pointer}
+.app{max-width:720px;margin:auto;min-height:100vh;background:var(--bg);padding-bottom:75px}
+header{position:sticky;top:0;z-index:20;background:var(--g);color:#fff;padding:13px 15px;display:flex;align-items:center;gap:12px;box-shadow:0 2px 8px #0002}
+.menu{font-size:27px;background:none;border:0;color:#fff}.brand{font-size:23px;font-weight:800;flex:1}.topbtn{border:0;background:#ffffff22;color:#fff;border-radius:10px;padding:8px 10px}
+main{padding:14px}.hero{background:linear-gradient(135deg,var(--g),var(--g2));color:#fff;border-radius:18px;padding:20px;margin-bottom:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;margin:10px 0;box-shadow:0 2px 8px #0000000a}
+h1,h2,h3{margin:5px 0 10px}.muted{color:var(--muted);font-size:14px}.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}.tile{border:1px solid var(--line);background:#fff;border-radius:14px;padding:14px;text-align:left}
+.btn{border:0;background:var(--g);color:#fff;border-radius:11px;padding:10px 13px}.btn.alt{background:#e8f2ee;color:var(--g)}.btn.gold{background:var(--gold);color:#fff}
+.drawer{position:fixed;inset:0;z-index:50;background:#0007;display:none}.drawer.open{display:block}.drawerbox{width:min(88%,390px);height:100%;background:#fff;overflow:auto;padding:16px}.drawerhead{background:var(--g);color:#fff;border-radius:15px;padding:18px;margin-bottom:10px}
+.ditem{width:100%;display:block;text-align:left;background:#fff;border:0;border-bottom:1px solid var(--line);padding:14px 7px;font-weight:700;color:var(--text)}
+.bottom{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(720px,100%);z-index:30;background:#fff;border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(4,1fr);padding:7px 4px}
+.nav{border:0;background:none;color:var(--muted);font-size:12px}.nav b{display:block;font-size:20px}.nav.active{color:var(--g)}
+.prayer{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}.ptime{text-align:center;background:#f0f7f4;border-radius:10px;padding:9px 3px;font-size:12px}.ptime strong{display:block;font-size:15px;margin-top:4px}
+.surah{display:flex;justify-content:space-between;align-items:center;gap:10px}.surah button{flex:1;text-align:left}
+.arabic{font-family:"Amiri","Scheherazade New",serif;font-size:27px;line-height:2.05;text-align:right;direction:rtl}
+.translation{line-height:1.75;margin-top:8px}.pron{background:#fff8df;border-left:4px solid var(--gold);padding:9px;margin-top:8px;line-height:1.7}
+.ayah{padding:13px 0;border-bottom:1px solid var(--line)}.ayah:last-child{border-bottom:0}.num{display:inline-block;background:var(--g);color:#fff;border-radius:50%;width:28px;height:28px;text-align:center;line-height:28px;font-size:12px;margin-bottom:7px}
+.listbtn{width:100%;display:flex;justify-content:space-between;align-items:center;border:1px solid var(--line);background:#fff;border-radius:12px;padding:13px;margin:7px 0}
+input,select,textarea{width:100%;padding:11px;border:1px solid var(--line);border-radius:10px;background:#fff}.hidden{display:none}
+.toast{position:fixed;left:50%;bottom:85px;transform:translateX(-50%);background:#18231f;color:#fff;padding:10px 15px;border-radius:10px;z-index:100;display:none;max-width:90%;text-align:center}
+.kibla{font-size:70px;text-align:center;transition:.5s}.center{text-align:center}.danger{color:#a33}.success{color:#08734f}.small{font-size:12px}
+</style>
+</head>
+<body>
+<div class="app">
+<header><button class="menu" onclick="openDrawer()">☰</button><div class="brand">NOOR</div><button class="topbtn" onclick="showHome()">⌂</button></header>
+<main id="main"></main>
+
+<div class="drawer" id="drawer" onclick="closeDrawer(event)">
+<div class="drawerbox" onclick="event.stopPropagation()">
+<div class="drawerhead"><b>NOOR ইসলামিক অ্যাপ</b><div class="small">আল-কুরআন • নামাজ • রমজান • তাসবিহ</div></div>
+<button class="ditem" onclick="showLocation()">১. 📍 আমার লোকেশন</button>
+<button class="ditem" onclick="showPrayer()">২. 🕌 আজকের নামাজের সময়</button>
+<button class="ditem" onclick="showQibla()">৩. 🧭 কিবলা কম্পাস</button>
+<button class="ditem" onclick="showQuran()">৪. 📖 আল-কুরআন পড়ুন</button>
+<button class="ditem" onclick="showAudio()">৫. 🎧 অডিও কুরআন</button>
+<button class="ditem" onclick="showRamadan()">৬. 📅 রমজান ও ইসলামিক ক্যালেন্ডার</button>
+<button class="ditem" onclick="showDua()">৭. 🤲 দোয়া ও সূরা</button>
+<button class="ditem" onclick="showTasbih()">৮. 📿 তাসবিহ কাউন্টার</button>
+<button class="ditem" onclick="showBookmarks()">৯. 🔖 বুকমার্ক</button>
+<button class="ditem" onclick="showDownloads()">১০. 📥 অফলাইন ডাউনলোড ম্যানেজার</button>
+<button class="ditem" onclick="showSettings()">১১. ⚙️ সেটিংস</button>
+<button class="ditem" onclick="showProfile()">১২. 👤 প্রোফাইল / আমাদের সম্পর্কে</button>
+</div></div>
+
+<nav class="bottom">
+<button class="nav active" onclick="showHome()"><b>⌂</b>হোম</button>
+<button class="nav" onclick="showBookmarks()"><b>🔖</b>বুকমার্ক</button>
+<button class="nav" onclick="showSettings()"><b>⚙️</b>সেটিংস</button>
+<button class="nav" onclick="showProfile()"><b>👤</b>প্রফাইল</button>
+</nav>
+<div class="toast" id="toast"></div>
+</div>
+
+<script>
+const API="https://api.alquran.cloud/v1";
+const AUDIO="https://cdn.islamic.network/quran/audio-surah/128/ar.alafasy/";
+const surahs=[
+["আল-ফাতিহা","মক্কী"],["আল-বাকারা","মাদানী"],["আলে ইমরান","মাদানী"],["আন-নিসা","মাদানী"],["আল-মায়িদা","মাদানী"],["আল-আনআম","মক্কী"],["আল-আরাফ","মক্কী"],["আল-আনফাল","মাদানী"],["আত-তাওবা","মাদানী"],["ইউনুস","মক্কী"],["হুদ","মক্কী"],["ইউসুফ","মক্কী"],["আর-রাদ","মাদানী"],["ইবরাহিম","মক্কী"],["আল-হিজর","মক্কী"],["আন-নাহল","মক্কী"],["আল-ইসরা","মক্কী"],["আল-কাহফ","মক্কী"],["মারইয়াম","মক্কী"],["ত্ব-হা","মক্কী"],["আল-আম্বিয়া","মক্কী"],["আল-হাজ্জ","মাদানী"],["আল-মুমিনুন","মক্কী"],["আন-নূর","মাদানী"],["আল-ফুরকান","মক্কী"],["আশ-শুআরা","মক্কী"],["আন-নামল","মক্কী"],["আল-কাসাস","মক্কী"],["আল-আনকাবুত","মক্কী"],["আর-রূম","মক্কী"],["লুকমান","মক্কী"],["আস-সাজদাহ","মক্কী"],["আল-আহযাব","মাদানী"],["সাবা","মক্কী"],["ফাতির","মক্কী"],["ইয়াসিন","মক্কী"],["আস-সাফফাত","মক্কী"],["সাদ","মক্কী"],["আয-যুমার","মক্কী"],["গাফির","মক্কী"],["ফুসসিলাত","মক্কী"],["আশ-শূরা","মক্কী"],["আয-যুখরুফ","মক্কী"],["আদ-দুখান","মক্কী"],["আল-জাসিয়াহ","মক্কী"],["আল-আহকাফ","মক্কী"],["মুহাম্মদ","মাদানী"],["আল-ফাতহ","মাদানী"],["আল-হুজুরাত","মাদানী"],["কাফ","মক্কী"],["আয-যারিয়াত","মক্কী"],["আত-তূর","মক্কী"],["আন-নাজম","মক্কী"],["আল-কামার","মক্কী"],["আর-রহমান","মাদানী"],["আল-ওয়াকিয়াহ","মক্কী"],["আল-হাদিদ","মাদানী"],["আল-মুজাদালাহ","মাদানী"],["আল-হাশর","মাদানী"],["আল-মুমতাহিনাহ","মাদানী"],["আস-সাফ","মাদানী"],["আল-জুমুআহ","মাদানী"],["আল-মুনাফিকুন","মাদানী"],["আত-তাগাবুন","মাদানী"],["আত-তালাক","মাদানী"],["আত-তাহরিম","মাদানী"],["আল-মুলক","মক্কী"],["আল-কলম","মক্কী"],["আল-হাক্কাহ","মক্কী"],["আল-মাআরিজ","মক্কী"],["নূহ","মক্কী"],["আল-জিন","মক্কী"],["আল-মুযযাম্মিল","মক্কী"],["আল-মুদ্দাসসির","মক্কী"],["আল-কিয়ামাহ","মক্কী"],["আল-ইনসান","মাদানী"],["আল-মুরসালাত","মক্কী"],["আন-নাবা","মক্কী"],["আন-নাযিআত","মক্কী"],["আবাসা","মক্কী"],["আত-তাকভীর","মক্কী"],["আল-ইনফিতার","মক্কী"],["আল-মুতাফফিফিন","মক্কী"],["আল-ইনশিকাক","মক্কী"],["আল-বুরুজ","মক্কী"],["আত-তারিক","মক্কী"],["আল-আলা","মক্কী"],["আল-গাশিয়াহ","মক্কী"],["আল-ফজর","মক্কী"],["আল-বালাদ","মক্কী"],["আশ-শামস","মক্কী"],["আল-লাইল","মক্কী"],["আদ-দুহা","মক্কী"],["আশ-শরহ","মক্কী"],["আত-তিন","মক্কী"],["আল-আলাক","মক্কী"],["আল-কদর","মক্কী"],["আল-বাইয়্যিনাহ","মাদানী"],["আয-যিলযাল","মাদানী"],["আল-আদিয়াত","মক্কী"],["আল-কারিয়াহ","মক্কী"],["আত-তাকাসুর","মক্কী"],["আল-আসর","মক্কী"],["আল-হুমাযাহ","মক্কী"],["আল-ফীল","মক্কী"],["কুরাইশ","মক্কী"],["আল-মাউন","মক্কী"],["আল-কাওসার","মক্কী"],["আল-কাফিরুন","মক্কী"],["আন-নাসর","মাদানী"],["আল-মাসাদ","মক্কী"],["আল-ইখলাস","মক্কী"],["আল-ফালাক","মক্কী"],["আন-নাস","মক্কী"]
+];
+const paraNames=Array.from({length:30},(_,i)=>`পারা-${i+1}`);
+let bnEdition=null,currentAudio=null,currentAudioUrl=null,prayerData=null;
+const $=id=>document.getElementById(id);
+function toast(x){$("toast").textContent=x;$("toast").style.display="block";clearTimeout(window.tt);window.tt=setTimeout(()=>$("toast").style.display="none",2600)}
+function openDrawer(){$("drawer").classList.add("open")} function closeDrawer(e){if(e.target.id==="drawer")$("drawer").classList.remove("open")}
+function setMain(x){$("main").innerHTML=x;window.scrollTo(0,0);$("drawer").classList.remove("open")}
+function safe(s){return String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]))}
+function showHome(){
+setMain(`<section class="hero"><h1>NOOR</h1><div>بিসমিল্লাহির রহমানির রহিম</div><p>কুরআন • নামাজ • রমজান • তাসবিহ</p></section>
+<div class="card"><h3>🕌 আজকের নামাজের সময়</h3><div id="homePrayer"><div class="muted">সময় লোড হচ্ছে...</div></div></div>
+<div class="grid">
+<button class="tile" onclick="showQuran()">📖<br><b>আল-কুরআন</b><br><span class="muted">১১৪ সূরা • ৩০ পারা</span></button>
+<button class="tile" onclick="showPrayer()">🕌<br><b>নামাজের সময়</b><br><span class="muted">ফজর থেকে এশা</span></button>
+<button class="tile" onclick="showQibla()">🧭<br><b>কিবলা</b><br><span class="muted">দিক দেখুন</span></button>
+<button class="tile" onclick="showTasbih()">📿<br><b>তাসবিহ</b><br><span class="muted">ডিজিটাল কাউন্টার</span></button>
+</div>`);
+loadPrayer("homePrayer");
+}
+async function getBnEdition(){
+if(bnEdition)return bnEdition;
+try{
+let r=await fetch(API+"/edition/language/bn"); let j=await r.json();
+if(j.data?.length){bnEdition=j.data.find(x=>/tafsir|translation|অনুবাদ/i.test((x.name||"")+" "+(x.englishName||"")) )?.identifier || j.data[0].identifier}
+}catch(e){}
+return bnEdition;
+}
+function quranHome(){
+setMain(`<div class="card"><h2>📖 আল-কুরআন পড়ুন</h2><p class="muted">১১৪ সূরা ও ৩০ পারা। কোনোটি চাপলে সম্পূর্ণ পাঠ লোড হবে।</p>
+<div class="row"><button class="btn" onclick="showSurahList('all')">১১৪ সূরা</button><button class="btn alt" onclick="showSurahList('madani')">মাদানী</button><button class="btn alt" onclick="showSurahList('makki')">মাক্কী</button><button class="btn gold" onclick="showJuzList()">৩০ পারা</button></div></div>
+<div class="card"><h3>কুরআন কাঠামো</h3><p>সূরা সমূহ → মাদানী / মাক্কী → সূরা → আরবি + বাংলা অনুবাদ + অডিও</p><p>কুরআন → পারা সমূহ → পারা ১–৩০ → আরবি + বাংলা অনুবাদ + অডিও</p></div>`);
+}
+function showQuran(){quranHome()}
+function showSurahList(filter){
+let a=surahs.map((s,i)=>({n:i+1,name:s[0],type:s[1]})).filter(x=>filter==="all"||(filter==="madani"&&x.type==="মাদানী")||(filter==="makki"&&x.type==="মক্কী"));
+setMain(`<div class="card"><button class="btn alt" onclick="quranHome()">← কুরআন</button><h2>📖 ${filter==="all"?"১১৪ সূরা":filter==="madani"?"মাদানী সূরা":"মাক্কী সূরা"}</h2><input id="surahSearch" placeholder="সূরা খুঁজুন..." oninput="filterSurahs()"> </div><div id="surahList">${a.map(x=>`<button class="listbtn surahRow" data-name="${safe(x.name)}" onclick="openSurah(${x.n})"><span>সূরা ${x.n}. ${safe(x.name)}<br><small>${x.type}</small></span><span>›</span></button>`).join("")}</div>`);
+}
+function filterSurahs(){let q=$("surahSearch").value.toLowerCase();document.querySelectorAll(".surahRow").forEach(x=>x.style.display=x.dataset.name.toLowerCase().includes(q)?"flex":"none")}
+function showJuzList(){
+setMain(`<div class="card"><button class="btn alt" onclick="quranHome()">← কুরআন</button><h2>📖 কুরআন — ৩০ পারা</h2><p class="muted">পারা চাপলে সেই পারার সব আয়াত লোড হবে। প্রথমবার ডেটা একবার লোড হলে পরে পারাগুলো ক্যাশ থেকে খোলা যাবে।</p><button class="btn" onclick="preloadQuran()">📥 কুরআন ডেটা লোড/সেভ করুন</button></div><div>${paraNames.map((x,i)=>`<button class="listbtn" onclick="openJuz(${i+1})"><span>📖 ${x}<br><small>আরবি • বাংলা অনুবাদ • অডিও</small></span><b>›</b></button>`).join("")}</div>`);
+}
+async function openSurah(n){
+setMain(`<div class="card"><button class="btn alt" onclick="showSurahList('all')">← সূরা তালিকা</button><h2>সূরা ${n}. ${safe(surahs[n-1][0])}</h2><div class="muted" id="loadmsg">কুরআনের আয়াত লোড হচ্ছে...</div></div>`);
+try{
+let bn=await getBnEdition();
+let urls=[API+`/surah/${n}/quran-uthmani`]; if(bn)urls.push(API+`/surah/${n}/${bn}`);
+let [ar,bnR]=await Promise.all(urls.map(u=>fetch(u).then(r=>r.json())));
+let arr=ar.data.ayahs, tr=bnR?.data?.ayahs||[];
+renderAyahs(arr,tr,n,`সূরা ${surahs[n-1][0]}`);
+}catch(e){$("loadmsg").innerHTML=`<span class="danger">কুরআন লোড করা যায়নি। ইন্টারনেট চালু করে আবার চেষ্টা করুন।</span><br><button class="btn" onclick="openSurah(${n})">আবার লোড করুন</button>`}
+}
+async function getFullQuranCached(){
+  const key="noor_full_quran_v2";
+  try{
+    const old=localStorage.getItem(key);
+    if(old){
+      const x=JSON.parse(old);
+      if(x?.arabic?.length) return x;
+    }
+  }catch(e){}
+  let bn=await getBnEdition();
+  const ar=await fetch(API+"/quran/quran-uthmani").then(r=>{if(!r.ok)throw Error("AR");return r.json()});
+  let tr=[];
+  if(bn){
+    try{tr=(await fetch(API+"/quran/"+bn).then(r=>{if(!r.ok)throw Error("BN");return r.json()})).data?.ayahs||[]}catch(e){}
+  }
+  const data={arabic:ar.data.ayahs||[],translation:tr,edition:bn||""};
+  try{localStorage.setItem(key,JSON.stringify(data))}catch(e){}
+  return data;
+}
+async function preloadQuran(){
+  try{
+    toast("📥 কুরআনের ডেটা লোড হচ্ছে...");
+    await getFullQuranCached();
+    toast("✅ কুরআনের ডেটা ফোনে সেভ হয়েছে");
+    showJuzList();
+  }catch(e){toast("কুরআন ডেটা লোড হয়নি। ইন্টারনেট চালু করুন।")}
+}
+async function openJuz(j){
+setMain(`<div class="card"><button class="btn alt" onclick="showJuzList()">← ৩০ পারা</button><h2>📖 পারা-${j}</h2><div id="loadmsg">পারা-${j} এর সব আয়াত লোড হচ্ছে...</div><div class="muted">প্রথমবার কুরআনের সম্পূর্ণ ডেটা লোড হচ্ছে। এরপর পারাগুলো দ্রুত খুলবে।</div></div>`);
+try{
+  const full=await getFullQuranCached();
+  const ayahs=full.arabic.filter(a=>Number(a.juz)===Number(j));
+  const trByNumber=new Map((full.translation||[]).map(a=>[a.number,a.text]));
+  const tr=ayahs.map(a=>({number:a.number,text:trByNumber.get(a.number)||"বাংলা অনুবাদ লোড হয়নি"}));
+  if(!ayahs.length) throw Error("EMPTY");
+  renderJuz(ayahs,tr,j);
+  localStorage.setItem("noor_last_read",JSON.stringify({type:"juz",number:j}));
+}catch(e){
+  $("loadmsg").innerHTML=`<span class="danger">পারা-${j} এখনো লোড হয়নি।</span><br><small>ইন্টারনেট চালু আছে কি না দেখুন। তারপর নিচের বোতাম চাপুন।</small><br><button class="btn" onclick="openJuz(${j})">🔄 আবার লোড করুন</button>`;
+}
+}
+function renderJuz(ayahs,tr,j){
+let html=`<div class="card"><div class="success">✅ পারা-${j} লোড হয়েছে — ${ayahs.length}টি আয়াত</div><p class="muted">আরবি পাঠ ও বাংলা অনুবাদ। অডিও প্রতিটি সংশ্লিষ্ট সূরা থেকে চালানো যাবে।</p></div>`;
+html+=ayahs.map((a,i)=>{let t=tr[i]?.text||"বাংলা অনুবাদ লোড হয়নি";let sn=surahs[a.surah.number-1]?.[0]||("সূরা "+a.surah.number);return `<article class="card ayah"><div><span class="num">${a.numberInSurah}</span> <small>আয়াত • ${safe(sn)}</small></div><div class="arabic">${safe(a.text)}</div><div class="translation"><b>বাংলা অর্থ:</b> ${safe(t)}</div><div class="pron"><b>বাংলা উচ্চারণ:</b> কুরআনের আরবি উচ্চারণ ভুলভাবে অনুমান করে লেখা হয়নি। ▶️ অডিও শুনে নির্ভুল আরবি তিলাওয়াত অনুসরণ করুন।</div><div class="row"><button class="btn" onclick="playSurahAudio(${a.surah.number})">▶️ অডিও</button><button class="btn alt" onclick="saveBookmark('পারা-${j}','${a.number}',${a.surah.number})">🔖 সেভ</button></div></article>`}).join("");
+$("main").innerHTML=html;
+}
+function renderAyahs(arr,tr,n,title){
+let html=`<div class="card"><div class="success">✅ ${title} লোড হয়েছে — ${arr.length}টি আয়াত</div></div>`;
+html+=arr.map((a,i)=>`<article class="card ayah"><div><span class="num">${a.numberInSurah}</span> <small>আয়াত</small></div><div class="arabic">${safe(a.text)}</div><div class="translation"><b>বাংলা অর্থ:</b> ${safe(tr[i]?.text||"বাংলা অনুবাদ লোড হয়নি")}</div><div class="pron"><b>বাংলা উচ্চারণ:</b> নির্ভুল কুরআনি উচ্চারণ ভুলভাবে বানিয়ে দেওয়া হয়নি। ▶️ অডিও শুনে আরবি পাঠ অনুসরণ করুন।</div><div class="row"><button class="btn" onclick="playSurahAudio(${n})">▶️ অডিও</button><button class="btn alt" onclick="saveBookmark('সূরা ${n}','${a.numberInSurah}',${n})">🔖 সেভ</button></div></article>`).join("");
+$("main").innerHTML=html;
+localStorage.setItem("noor_last_read",JSON.stringify({type:"surah",number:n}));
+}
+async function playSurahAudio(n){
+try{
+let url=AUDIO+n+".mp3"; if(currentAudio){currentAudio.pause();currentAudio=null}
+currentAudio=new Audio(url);currentAudio.playbackRate=Number(localStorage.getItem("noor_speed")||1);await currentAudio.play();toast("▶️ অডিও চলছে — সূরা "+n);currentAudio.onended=()=>toast("অডিও শেষ হয়েছে")
+}catch(e){toast("অডিও চালাতে ইন্টারনেট/আগে ডাউনলোড করা অডিও প্রয়োজন।")}
+}
+function showAudio(){
+setMain(`<div class="card"><h2>🎧 অডিও কুরআন</h2><p>১১৪ সূরার অডিও। সূরা নির্বাচন করে ▶️ প্লে করুন।</p><p class="muted">প্রথমবার ইন্টারনেট লাগবে। পরে ব্রাউজার ক্যাশে রাখা অডিও অফলাইনে ব্যবহার করা যেতে পারে।</p></div><div>${surahs.map((s,i)=>`<button class="listbtn" onclick="playSurahAudio(${i+1})"><span>🎧 সূরা ${i+1}. ${safe(s[0])}</span><b>▶️</b></button>`).join("")}</div>`)
+}
+async function loadPrayer(target="homePrayer"){
+let el=$(target);if(!el)return;
+try{
+let loc=JSON.parse(localStorage.getItem("noor_location")||'{"lat":23.8103,"lon":90.4125,"name":"ঢাকা, বাংলাদেশ"}');
+let d=new Date(),date=`${String(d.getDate()).padStart(2,"0")}-${String(d.getMonth()+1).padStart(2,"0")}-${d.getFullYear()}`;
+let r=await fetch(`https://api.aladhan.com/v1/timings/${date}?latitude=${loc.lat}&longitude=${loc.lon}&method=1`).then(x=>x.json());
+if(r.code!==200)throw 0; prayerData=r.data.timings;localStorage.setItem("noor_prayer",JSON.stringify({date,t:prayerData,name:loc.name}));
+renderPrayer(el,prayerData,loc.name);
+}catch(e){
+let c=JSON.parse(localStorage.getItem("noor_prayer")||"null");
+if(c){renderPrayer(el,c.t,c.name+" (সর্বশেষ সংরক্ষিত)")}else el.innerHTML=`<div class="danger">আজকের নামাজের সময় এখনো লোড হয়নি।</div><button class="btn" onclick="loadPrayer('${target}')">আবার লোড করুন</button>`
+}}
+function renderPrayer(el,t,name){
+let p=[["ফজর",t.Fajr],["যোহর",t.Dhuhr],["আসর",t.Asr],["মাগরিব",t.Maghrib],["এশা",t.Isha]];
+el.innerHTML=`<div class="small">📍 ${safe(name)}</div><div class="prayer">${p.map(x=>`<div class="ptime">${x[0]}<strong>${x[1]}</strong></div>`).join("")}</div><p class="muted" id="nextPrayer">পরবর্তী নামাজ হিসাব হচ্ছে...</p>`
+calcNext(p);
+}
+function calcNext(p){let now=new Date(),mins=now.getHours()*60+now.getMinutes(),next=p.map(x=>{let [h,m]=x[1].split(":").map(Number);return [x[0],h*60+m]}).find(x=>x[1]>mins);if(!next)next=[p[0][0],p[0][1].split(":").map(Number).reduce((a,b)=>a*60+b)+1440];let diff=next[1]-mins;$("nextPrayer").textContent=`পরবর্তী নামাজ: ${next[0]} — প্রায় ${Math.floor(diff/60)} ঘণ্টা ${diff%60} মিনিট পর`}
+function showPrayer(){setMain(`<div class="card"><h2>🕌 আজকের নামাজের সময়</h2><div id="prayerPage">লোড হচ্ছে...</div></div>`);loadPrayer("prayerPage")}
+function showLocation(){setMain(`<div class="card"><h2>📍 আমার লোকেশন</h2><p>বর্তমান/শেষ সংরক্ষিত লোকেশন ব্যবহার করা হবে।</p><div id="locbox"></div><button class="btn" onclick="getGPS()">📍 Auto GPS</button></div>`);showSavedLocation()}
+function showSavedLocation(){let x=JSON.parse(localStorage.getItem("noor_location")||'{"lat":23.8103,"lon":90.4125,"name":"ঢাকা, বাংলাদেশ"}');$("locbox").innerHTML=`<p><b>${safe(x.name)}</b></p><small>${x.lat.toFixed(4)}, ${x.lon.toFixed(4)}</small><p>🔒 লক: <button class="btn alt" onclick="toggleLock()">${localStorage.getItem("noor_lock")==="1"?"ON":"OFF"}</button></p>`}
+function toggleLock(){localStorage.setItem("noor_lock",localStorage.getItem("noor_lock")==="1"?"0":"1");showSavedLocation()}
+function getGPS(){if(!navigator.geolocation){toast("এই ফোনে GPS নেই");return}navigator.geolocation.getCurrentPosition(pos=>{if(localStorage.getItem("noor_lock")==="1"){toast("লোকেশন লক করা আছে");return}let x={lat:pos.coords.latitude,lon:pos.coords.longitude,name:"বর্তমান লোকেশন"};localStorage.setItem("noor_location",JSON.stringify(x));showSavedLocation();toast("লোকেশন সেভ হয়েছে")},()=>toast("GPS অনুমতি দিন"))}
+function showQibla(){
+setMain(`<div class="card center"><h2>🧭 কিবলা কম্পাস</h2><div id="qangle">হিসাব হচ্ছে...</div><div class="kibla" id="arrow">↑</div><b class="success">✅ কিবলা পাওয়া গেছে</b><p class="muted">ঢাকার কাছাকাছি কিবলা প্রায় ২৭৮°। আপনার অবস্থান অনুযায়ী কোণ পরিবর্তিত হবে।</p><button class="btn" onclick="calcQibla()">লোকেশন দিয়ে হিসাব করুন</button></div>`);calcQibla()}
+function calcQibla(){let x=JSON.parse(localStorage.getItem("noor_location")||'{"lat":23.8103,"lon":90.4125}'),lat=x.lat*Math.PI/180,lon=x.lon*Math.PI/180,qLat=21.4225*Math.PI/180,qLon=39.8262*Math.PI/180,dLon=qLon-lon,b=Math.atan2(Math.sin(dLon),Math.cos(lat)*Math.tan(qLat)-Math.sin(lat)*Math.cos(dLon))*180/Math.PI;b=(b+360)%360;$("qangle").textContent=Math.round(b)+"°";$("arrow").style.transform=`rotate(${b}deg)`}
+function showRamadan(){let d=new Date(),h=new Intl.DateTimeFormat("bn-BD-u-ca-islamic",{dateStyle:"full"}).format(d);setMain(`<div class="card"><h2>📅 রমজান ও ইসলামিক ক্যালেন্ডার</h2><p>আজকের হিজরি তারিখ:</p><h3>${h}</h3></div><div class="card"><h3>সময়সূচি</h3><p>সেহরি ও ইফতারের সঠিক স্থানীয় সময় পেতে নামাজের সময় লোড করুন।</p><button class="btn" onclick="showPrayer()">🕌 আজকের সময় দেখুন</button></div>`)}
+function showDua(){setMain(`<div class="card"><h2>🤲 দোয়া ও সূরা</h2><p>বিসমিল্লাহির রহমানির রহিম</p><h3>আয়াতুল কুরসি</h3><div class="arabic">اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ</div><p>বাংলা অর্থ: আল্লাহ, তিনি ছাড়া কোনো উপাস্য নেই; তিনি চিরঞ্জীব, সবকিছুর ধারক।</p></div><div class="card"><h3>নামাজের দোয়া</h3><p>তাশাহহুদ, দরুদ ও অন্যান্য দোয়া এখানে সংরক্ষণ করে পড়তে পারবেন।</p></div>`)}
+let count=Number(localStorage.getItem("noor_tasbih")||0);
+function showTasbih(){setMain(`<div class="card center"><h2>📿 তাসবিহ কাউন্টার</h2><div style="font-size:60px">${count}</div><button class="btn gold" style="font-size:25px;padding:22px 35px;border-radius:50%" onclick="tasbih()">+১</button><div class="row" style="justify-content:center;margin-top:15px"><button class="btn alt" onclick="resetTasbih()">রিসেট</button><button class="btn alt" onclick="toast('হিস্ট্রি: '+localStorage.getItem('noor_tasbih_history')||'')">হিস্ট্রি</button></div></div>`)}
+function tasbih(){count++;localStorage.setItem("noor_tasbih",count);let h=JSON.parse(localStorage.getItem("noor_tasbih_history")||"[]");h.push({time:new Date().toLocaleString(),count});localStorage.setItem("noor_tasbih_history",JSON.stringify(h));showTasbih()}
+function resetTasbih(){count=0;localStorage.setItem("noor_tasbih","0");showTasbih()}
+function saveBookmark(cat,ayah,surah){let a=JSON.parse(localStorage.getItem("noor_bookmarks")||"[]");a.push({cat,ayah,surah,note:"",fav:false,time:Date.now()});localStorage.setItem("noor_bookmarks",JSON.stringify(a));toast("🔖 বুকমার্ক সেভ হয়েছে")}
+function showBookmarks(){let a=JSON.parse(localStorage.getItem("noor_bookmarks")||"[]");setMain(`<div class="card"><h2>🔖 বুকমার্ক</h2><input placeholder="বুকমার্ক খুঁজুন..." oninput="searchBm(this.value)"></div><div id="bm">${a.length?a.map((x,i)=>`<div class="card bm" data-t="${safe(x.cat+" "+x.ayah)}"><b>${safe(x.cat)}</b> — আয়াত ${safe(x.ayah)}<div class="row"><button class="btn" onclick="playSurahAudio(${x.surah})">▶️</button><button class="btn alt" onclick="delBm(${i})">🗑️</button></div></div>`).join(""):"<div class='card muted'>কোনো বুকমার্ক নেই।</div>"}</div>`)}
+function searchBm(q){document.querySelectorAll(".bm").forEach(x=>x.style.display=x.dataset.t.toLowerCase().includes(q.toLowerCase())?"block":"none")}
+function delBm(i){let a=JSON.parse(localStorage.getItem("noor_bookmarks")||"[]");a.splice(i,1);localStorage.setItem("noor_bookmarks",JSON.stringify(a));showBookmarks()}
+function showDownloads(){setMain(`<div class="card"><h2>📥 অফলাইন ডাউনলোড ম্যানেজার</h2><p>কুরআনের সূরা অডিও ডাউনলোড/ক্যাশ করতে পারেন।</p><button class="btn" onclick="downloadCurrentAudio()">বর্তমান অডিও ক্যাশ</button><p class="muted">৬৪ জেলার নামাজের সময় অফলাইনে রাখতে হলে প্রতিটি জেলার সময় আগে ইন্টারনেট থেকে ডাউনলোড করতে হবে।</p></div>`)}
+async function downloadCurrentAudio(){toast("অডিও ক্যাশ করার চেষ্টা চলছে...");try{let n=prompt("কোন সূরার নম্বর? ১-১১৪");n=Number(n);if(n<1||n>114)throw 0;let r=await fetch(AUDIO+n+".mp3");if(!r.ok)throw 0;await caches.open("noor-audio-v1").then(c=>c.put(AUDIO+n+".mp3",r.clone()));toast("✅ সূরা "+n+" অডিও ক্যাশ হয়েছে")}catch(e){toast("অডিও ডাউনলোড হয়নি")}}
+function showSettings(){setMain(`<div class="card"><h2>⚙️ সেটিংস</h2><h3>ডিসপ্লে</h3><button class="listbtn" onclick="toggleDark()">🌙 ডার্ক / লাইট মোড</button><label>ফন্ট সাইজ</label><input type="range" min="16" max="30" value="27" oninput="document.querySelectorAll('.arabic').forEach(x=>x.style.fontSize=this.value+'px')"><h3>অডিও</h3><label>অডিও স্পিড</label><select onchange="localStorage.setItem('noor_speed',this.value)"><option>1</option><option>0.75</option><option>1.25</option><option>1.5</option></select><h3>লোকেশন</h3><button class="listbtn" onclick="showLocation()">📍 লোকেশন সেটিংস</button><h3>ডাটা</h3><button class="listbtn" onclick="clearCache()">🗑️ ক্যাশ ক্লিয়ার</button><button class="listbtn" onclick="resetTasbih()">📿 তাসবিহ কাউন্ট রিসেট</button></div>`)}
+function toggleDark(){document.body.style.background=document.body.style.background==="#101815"?"var(--bg)":"#101815";document.body.style.color=document.body.style.color==="white"?"var(--text)":"white"}
+async function clearCache(){localStorage.removeItem("noor_prayer");try{let ks=await caches.keys();for(let k of ks)await caches.delete(k)}catch(e){}toast("ক্যাশ পরিষ্কার হয়েছে")}
+function showProfile(){setMain(`<div class="card"><h2>👤 প্রোফাইল / আমাদের সম্পর্কে</h2><label>নাম</label><input id="pname" value="${safe(localStorage.getItem("noor_name")||"")}"><button class="btn" onclick="localStorage.setItem('noor_name',$('pname').value);toast('নাম সেভ হয়েছে')">সেভ</button></div><div class="card"><h3>NOOR</h3><p>কুরআন, নামাজ, রমজান, কিবলা ও তাসবিহের জন্য ইসলামিক অ্যাপ।</p><p class="muted">Google Login, background notifications ও সম্পূর্ণ স্বয়ংক্রিয় cloud sync-এর জন্য আলাদা নিরাপদ সার্ভার/সার্ভিস প্রয়োজন।</p></div>`)}
+showHome();
+</script>
+</body>
+</html>
